@@ -1,9 +1,9 @@
 import AcmeLogo from '@/app/ui/acme-logo';
-import LoginForm from '@/app/ui/login-form';
+import ForgotPasswordForm from '../ui/forgot-password-form';
 import Link from 'next/link';
 import { Suspense } from 'react';
  
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   return (
     <main className="flex items-center justify-center md:h-screen">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
@@ -13,26 +13,16 @@ export default function LoginPage() {
           </div>
         </div>
         <Suspense>
-          <LoginForm />
+          <ForgotPasswordForm />
         </Suspense>
         
-        {/* Additional Options */}
-        <div className="flex flex-col space-y-2 text-sm text-center">
+        <div className="text-sm text-center text-gray-600">
           <Link 
-            href="/forgot-password"
+            href="/login"
             className="text-blue-600 hover:text-blue-800 hover:underline"
           >
-            Forgot your password?
+            Back to login
           </Link>
-          <div className="text-gray-600">
-            Create a account?{' '}
-            <Link 
-              href="/signup"
-              className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
-            >
-              Sign up
-            </Link>
-          </div>
         </div>
       </div>
     </main>
