@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, Suspense } from 'react';
 import { useFormStatus } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import { resetPassword, type ResetPasswordState } from '@/app/lib/actions';
@@ -8,7 +8,7 @@ import { Button } from '@/app/ui/button';
 import { KeyIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { ArrowRightIcon } from '@heroicons/react/20/solid';
 
-export default function ResetPasswordForm() {
+function ResetPasswordFormContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -107,5 +107,17 @@ function ResetPasswordButton() {
     <Button className="mt-4 w-full" aria-disabled={pending}>
       Reset password <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>
+  );
+}
+
+export default function ResetPasswordForm() {
+  return (
+    <Suspense fallback={
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+        <p className="text-sm text-gray-600">Loading...</p>
+      </div>
+    }>
+      <ResetPasswordFormContent />
+    </Suspense>
   );
 }
