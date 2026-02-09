@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev --turbopack",
+    "dev": "bash scripts/dev.sh",
     "start": "next start",
     "lint": "eslint ."
   },
