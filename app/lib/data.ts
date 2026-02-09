@@ -13,15 +13,7 @@ const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
-
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
-
     const data = await sql<Revenue[]>`SELECT * FROM revenue`;
-
-    // console.log('Data fetch completed after 3 seconds.');
 
     return data;
   } catch (error) {
@@ -30,6 +22,7 @@ export async function fetchRevenue() {
   }
 }
 
+// Fetch the last 5 invoices, sorted by date
 export async function fetchLatestInvoices() {
   try {
     const data = await sql<LatestInvoiceRaw[]>`
@@ -159,7 +152,8 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
-
+    
+    console.log(invoice); // Check if invoice is an empty array []
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
